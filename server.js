@@ -1,20 +1,15 @@
-// server.js
-
-const express = require('express');
-const path = require('path');
-
+const express = require("express");
 const app = express();
-const port = 3000;
+const Joi = require("joi");
+const multer = require("multer");
+app.use(express.static("public"));
+app.use(express.json());
+const cors = require("cors");
+app.use(cors());
+const mongoose = require("mongoose");
 
-// Serve static files (CSS, JavaScript, images)
-app.use(express.static(path.join(__dirname, 'public')));
+const upload = multer({ dest: __dirname + "/public/images" });
 
-// Serve the combined HTML file
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'combined.html'));
-});
-
-// Start the server
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+app.listen(3000, () => {
+  console.log("Running");
 });
